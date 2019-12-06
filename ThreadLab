@@ -1,0 +1,59 @@
+//Rivka Salem 
+public class ThreadLab {
+	public static void main(String[]args) {
+		//Create tasks:
+		Runnable Lyric1 = new PrintL("Fa", 100);
+		Runnable Lyric2 = new PrintL("La", 100);
+		Runnable Lyric3 = new PrintL("Na", 100);
+		Runnable Print100 = new PrintNum(100);
+		
+		//Create Threads:
+		Thread thread1 = new Thread(Lyric1);
+		Thread thread2 = new Thread(Lyric2);
+		Thread thread3 = new Thread(Lyric3);
+		Thread thread4 = new Thread(Print100);
+		
+		thread1.start();
+		thread2.start();
+		thread3.start();
+		thread4.start();
+	}
+}
+
+class PrintL implements Runnable {
+	private String stringToPrint;
+	private int times;
+	//Construct task with string lyrics and # of times to print
+	public PrintL(String s, int t) {
+		stringToPrint = s;
+		times = t;
+	}
+	@Override 
+	//tell system which tasks to perform
+	public void run() {
+		for (int i=0; i< times; i++) {
+			System.out.println(stringToPrint);
+			try {
+					Thread.sleep(1000);
+			}
+			catch (Exception ie) {
+				
+			}
+		}
+	}
+}
+//task class for printing number from 1 to n 
+class PrintNum implements Runnable{
+	private int lastN;
+public PrintNum(int n) {
+	lastN = n;
+}
+@Override
+public void run() {
+	for (int i =1; i < lastN; i++) {
+		System.out.print(" " + i);
+		}
+	}
+}
+		
+		
